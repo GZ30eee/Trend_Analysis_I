@@ -852,7 +852,9 @@ def plot_pattern(df, pattern_points, pattern_name):
                 print(f"Error in Cup and Handle pattern: {e}")
                 continue
                 
-        elif pattern_name in ["Double Top", "Double Bottom"]:
+        # elif pattern_name in ["Double Top", "Double Bottom"]:
+        elif pattern_name in ["Double Bottom"]:
+
             # Add markers for pattern points
             for key, point_idx in pattern.items():
                 if isinstance(point_idx, (np.int64, int)):  
@@ -1360,8 +1362,8 @@ def evaluate_pattern_detection(df, patterns):
             # Determine the last point of the pattern
             if pattern_type == "Head and Shoulders":
                 last_point_idx = max(int(pattern['left_shoulder']), int(pattern['head']), int(pattern['right_shoulder']))
-            elif pattern_type == "Double Top":
-                last_point_idx = max(int(pattern['peak1']), int(pattern['peak2']))
+            # elif pattern_type == "Double Top":
+            #     last_point_idx = max(int(pattern['peak1']), int(pattern['peak2']))
             elif pattern_type == "Double Bottom":
                 last_point_idx = max(int(pattern['trough1']), int(pattern['trough2']))
             elif pattern_type == "Cup and Handle":
@@ -1377,7 +1379,9 @@ def evaluate_pattern_detection(df, patterns):
                         correct_predictions += 1
                     elif df['Close'][last_point_idx + look_forward_window] < df['Close'][last_point_idx]:
                         false_positives += 1
-                elif pattern_type in ["Head and Shoulders", "Double Top"]:  # Bearish patterns
+                # elif pattern_type in ["Head and Shoulders", "Double Top"]:  # Bearish patterns
+                elif pattern_type in ["Head and Shoulders"]:  # Bearish patterns
+
                     if df['Close'][last_point_idx + look_forward_window] < df['Close'][last_point_idx]:
                         correct_predictions += 1
                     elif df['Close'][last_point_idx + look_forward_window] > df['Close'][last_point_idx]:
@@ -1401,7 +1405,9 @@ def create_stock_dashboard(selected_data):
     st.write("**Pattern Detection Summary**")
     
     pattern_cols = st.columns(4)
-    patterns = ["Head and Shoulders", "Double Top", "Double Bottom", "Cup and Handle"]
+    # patterns = ["Head and Shoulders", "Double Top", "Double Bottom", "Cup and Handle"]
+    patterns = ["Head and Shoulders", "Double Bottom", "Cup and Handle"]
+
     
     for i, pattern in enumerate(patterns):
         with pattern_cols[i]:
@@ -1520,7 +1526,7 @@ def main():
                     
                     patterns = {}
                     patterns["Head and Shoulders"] = detect_head_and_shoulders(df_filtered)
-                    patterns["Double Top"] = detect_double_top(df_filtered)
+                    # patterns["Double Top"] = detect_double_top(df_filtered)
                     patterns["Double Bottom"] = detect_double_bottom(df_filtered)
                     patterns["Cup and Handle"] = detect_cup_and_handle(df_filtered)
                     
