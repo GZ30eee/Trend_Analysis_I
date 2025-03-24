@@ -172,16 +172,10 @@ def validate_stock_data(df):
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-import os
-
-def read_stock_data_from_excel(file_name):
+def read_stock_data_from_excel(file_path):
     try:
-        # Construct the full path by joining the folder name and file name
-        file_path = os.path.join('excel_files', file_name)
-        
-        with st.spinner(f"Reading Excel file {file_name}..."):
+        with st.spinner("Reading Excel file..."):
             df = pd.read_excel(file_path)
-            
             # Ensure the required columns are present
             required_columns = ['TIMESTAMP', 'SYMBOL', 'OPEN', 'HIGH', 'LOW', 'CLOSE', 'VOLUME']
             if not all(column in df.columns for column in required_columns):
@@ -200,11 +194,6 @@ def read_stock_data_from_excel(file_name):
             df['SYMBOL'] = df['SYMBOL'].str.strip()
             
             return df
-            
-    except FileNotFoundError:
-        st.error(f"Excel file not found at: {file_path}")
-        logging.error(f"Excel file not found at: {file_path}")
-        return None
     except Exception as e:
         st.error(f"Error reading Excel file: {e}")
         logging.error(f"Error reading Excel file: {e}")
@@ -1616,30 +1605,24 @@ def forecast_future_prices(df, forecast_days=30):
     return combined_df
 
 def main():
-    excel_dir = 'excel_files'  # <-- Add this line
     # Header with logo and title
     st.markdown('<div class="main-header">📈 Advanced Stock Pattern Scanner(Static)</div>', unsafe_allow_html=True)
     
-    # Check if excel_files directory exists
-    if not os.path.exists('excel_files'):
-        st.error("The 'excel_files' directory does not exist. Please create it.")
-        st.stop()
-    
     st.sidebar.markdown('<div style="text-align: center; font-weight: bold; font-size: 1.5rem; margin-bottom: 1rem;">Scanner Settings</div>', unsafe_allow_html=True)
     
-    # Dropdown to select Excel file - MODIFIED FOR excel_files DIRECTORY
+    # Dropdown to select Excel file
     st.sidebar.markdown("### 📁 Data Source")
-    excel_files = sorted([f for f in os.listdir(excel_dir) if f.lower().endswith('.xlsx')])
-    stock_names = [os.path.splitext(f)[0] for f in excel_files]
-    file_mapping = dict(zip(stock_names, excel_files))
-    
-    selected_stock = st.sidebar.selectbox("Select Stock", stock_names)
-    selected_file = os.path.join(excel_dir, file_mapping[selected_stock])  # Single join
+    excel_files = sorted([f for f in os.listdir() if f.endswith('.xlsx')])  # Sort alphabetically
+    if not excel_files:
+        st.error("No Excel files found in the directory. Please add Excel files.")
+        st.stop()
+
+    selected_file = st.sidebar.selectbox("Select Excel File", excel_files)
 
     if selected_file != st.session_state.selected_file:
         st.session_state.selected_file = selected_file
         with st.spinner("Loading data..."):
-            st.session_state.df = read_stock_data_from_excel(selected_file)  # This function should now receive full path
+            st.session_state.df = read_stock_data_from_excel(selected_file)
 
     if st.session_state.df is not None:
         # Get the date range from the selected file
@@ -1743,11 +1726,9 @@ def main():
             st.session_state.selected_pattern = None
             
             if len(stock_data) > 0:
-                base_name = os.path.splitext(file_mapping[selected_stock])[0]
-                st.success(f"✅ Scan completed for '{base_name}' successfully! Found patterns in {len(stock_data)} stocks.")
+                st.success(f"✅ Scan completed! Found patterns in {len(stock_data)} stocks.")
             else:
-                base_name = os.path.splitext(file_mapping[selected_stock])[0]
-                st.warning(f"No patterns found in '{base_name}' for the selected criteria.")
+                st.warning("No patterns found in any stocks for the selected criteria.")
 
         # Display results if stock data exists
         if st.session_state.stock_data:
