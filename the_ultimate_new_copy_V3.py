@@ -1618,22 +1618,33 @@ def forecast_future_prices(df, forecast_days=30):
 def main():
     # Header with logo and title
     st.markdown('<div class="main-header">📈 Advanced Stock Pattern Scanner(Static)</div>', unsafe_allow_html=True)
-        
+    
+    # Check if excel_files directory exists
+    if not os.path.exists('excel_files'):
+        st.error("The 'excel_files' directory does not exist. Please create it.")
+        st.stop()
+    
     st.sidebar.markdown('<div style="text-align: center; font-weight: bold; font-size: 1.5rem; margin-bottom: 1rem;">Scanner Settings</div>', unsafe_allow_html=True)
     
-    # Dropdown to select Excel file
+    # Dropdown to select Excel file - MODIFIED FOR excel_files DIRECTORY
     st.sidebar.markdown("### 📁 Data Source")
-    excel_files = sorted([f for f in os.listdir() if f.endswith('.xlsx')])  # Sort alphabetically
+    excel_files = sorted([f for f in os.listdir('excel_files') if f.lower().endswith('.xlsx')])  # Look in excel_files folder
+    
     if not excel_files:
-        st.error("No Excel files found in the directory. Please add Excel files.")
+        st.error("No Excel files found in the 'excel_files' directory. Please add Excel files.")
         st.stop()
 
-    selected_file = st.sidebar.selectbox("Select Excel File", excel_files)
+    # Display clean stock names without extensions
+    stock_names = [os.path.splitext(f)[0] for f in excel_files]
+    file_mapping = dict(zip(stock_names, excel_files))
+    
+    selected_stock = st.sidebar.selectbox("Select Stock", stock_names)
+    selected_file = os.path.join('excel_files', file_mapping[selected_stock])  # Full path to file
 
     if selected_file != st.session_state.selected_file:
         st.session_state.selected_file = selected_file
         with st.spinner("Loading data..."):
-            st.session_state.df = read_stock_data_from_excel(selected_file)
+            st.session_state.df = read_stock_data_from_excel(selected_file)  # This function should now receive full path
 
     if st.session_state.df is not None:
         # Get the date range from the selected file
@@ -1737,9 +1748,12 @@ def main():
             st.session_state.selected_pattern = None
             
             if len(stock_data) > 0:
-                st.success(f"✅ Scan completed! Found patterns in {len(stock_data)} stocks.")
+                # Get the base filename without extension
+                file_name = os.path.splitext(os.path.basename(selected_file))[0]
+                st.success(f"✅ Scan completed for '{file_name}' successfully! Found patterns in {len(stock_data)} stocks.")
             else:
-                st.warning("No patterns found in any stocks for the selected criteria.")
+                file_name = os.path.splitext(os.path.basename(selected_file))[0]
+                st.warning(f"No patterns found in '{file_name}' for the selected criteria.")
 
         # Display results if stock data exists
         if st.session_state.stock_data:
