@@ -1616,6 +1616,7 @@ def forecast_future_prices(df, forecast_days=30):
     return combined_df
 
 def main():
+    excel_dir = 'excel_files'  # <-- Add this line
     # Header with logo and title
     st.markdown('<div class="main-header">📈 Advanced Stock Pattern Scanner(Static)</div>', unsafe_allow_html=True)
     
