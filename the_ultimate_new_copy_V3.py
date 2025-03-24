@@ -172,10 +172,16 @@ def validate_stock_data(df):
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def read_stock_data_from_excel(file_path):
+import os
+
+def read_stock_data_from_excel(file_name):
     try:
-        with st.spinner("Reading Excel file..."):
+        # Construct the full path by joining the folder name and file name
+        file_path = os.path.join('excel_files', file_name)
+        
+        with st.spinner(f"Reading Excel file {file_name}..."):
             df = pd.read_excel(file_path)
+            
             # Ensure the required columns are present
             required_columns = ['TIMESTAMP', 'SYMBOL', 'OPEN', 'HIGH', 'LOW', 'CLOSE', 'VOLUME']
             if not all(column in df.columns for column in required_columns):
@@ -194,6 +200,11 @@ def read_stock_data_from_excel(file_path):
             df['SYMBOL'] = df['SYMBOL'].str.strip()
             
             return df
+            
+    except FileNotFoundError:
+        st.error(f"Excel file not found at: {file_path}")
+        logging.error(f"Excel file not found at: {file_path}")
+        return None
     except Exception as e:
         st.error(f"Error reading Excel file: {e}")
         logging.error(f"Error reading Excel file: {e}")
@@ -1613,9 +1624,13 @@ def main():
     # Dropdown to select Excel file
     st.sidebar.markdown("### 📁 Data Source")
     excel_files = sorted([f for f in os.listdir() if f.endswith('.xlsx')])  # Sort alphabetically
+    stock_names = [os.path.splitext(f)[0] for f in excel_files]
+
     if not excel_files:
         st.error("No Excel files found in the directory. Please add Excel files.")
         st.stop()
+
+    file_mapping = dict(zip(stock_names, excel_files))
 
     selected_file = st.sidebar.selectbox("Select Excel File", excel_files)
 
