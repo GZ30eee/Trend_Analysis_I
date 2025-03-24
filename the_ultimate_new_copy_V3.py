@@ -1628,18 +1628,12 @@ def main():
     
     # Dropdown to select Excel file - MODIFIED FOR excel_files DIRECTORY
     st.sidebar.markdown("### 📁 Data Source")
-    excel_files = sorted([f for f in os.listdir('excel_files') if f.lower().endswith('.xlsx')])  # Look in excel_files folder
-    
-    if not excel_files:
-        st.error("No Excel files found in the 'excel_files' directory. Please add Excel files.")
-        st.stop()
-
-    # Display clean stock names without extensions
+    excel_files = sorted([f for f in os.listdir(excel_dir) if f.lower().endswith('.xlsx')])
     stock_names = [os.path.splitext(f)[0] for f in excel_files]
     file_mapping = dict(zip(stock_names, excel_files))
     
     selected_stock = st.sidebar.selectbox("Select Stock", stock_names)
-    selected_file = os.path.join('excel_files', file_mapping[selected_stock])  # Full path to file
+    selected_file = os.path.join(excel_dir, file_mapping[selected_stock])  # Single join
 
     if selected_file != st.session_state.selected_file:
         st.session_state.selected_file = selected_file
@@ -1748,12 +1742,11 @@ def main():
             st.session_state.selected_pattern = None
             
             if len(stock_data) > 0:
-                # Get the base filename without extension
-                file_name = os.path.splitext(os.path.basename(selected_file))[0]
-                st.success(f"✅ Scan completed for '{file_name}' successfully! Found patterns in {len(stock_data)} stocks.")
+                base_name = os.path.splitext(file_mapping[selected_stock])[0]
+                st.success(f"✅ Scan completed for '{base_name}' successfully! Found patterns in {len(stock_data)} stocks.")
             else:
-                file_name = os.path.splitext(os.path.basename(selected_file))[0]
-                st.warning(f"No patterns found in '{file_name}' for the selected criteria.")
+                base_name = os.path.splitext(file_mapping[selected_stock])[0]
+                st.warning(f"No patterns found in '{base_name}' for the selected criteria.")
 
         # Display results if stock data exists
         if st.session_state.stock_data:
