@@ -1618,20 +1618,37 @@ def forecast_future_prices(df, forecast_days=30):
 def main():
     # Header with logo and title
     st.markdown('<div class="main-header">📈 Advanced Stock Pattern Scanner(Static)</div>', unsafe_allow_html=True)
+    # Verify the excel_files directory exists
+    if not os.path.exists('excel_files'):
+        st.error("The 'excel_files' directory does not exist. Please create it.")
+        st.stop()
     
+    # Get files with error handling
+    try:
+        excel_files = sorted([
+            f for f in os.listdir('excel_files') 
+            if f.lower().endswith(('.xlsx', '.xls'))
+        ])
+    except Exception as e:
+        st.error(f"Error reading directory: {e}")
+        st.stop()
+    
+    # Display appropriate messages
+    if not excel_files:
+        st.error("""
+        No Excel files found in the 'excel_files' directory. 
+        Please add .xlsx files to the excel_files folder.
+        Current directory contents: {}
+        """.format(os.listdir('excel_files')))
+        st.stop()
+        
     st.sidebar.markdown('<div style="text-align: center; font-weight: bold; font-size: 1.5rem; margin-bottom: 1rem;">Scanner Settings</div>', unsafe_allow_html=True)
     
     # Dropdown to select Excel file
     st.sidebar.markdown("### 📁 Data Source")
-    excel_files = sorted([f for f in os.listdir() if f.endswith('.xlsx')])  # Sort alphabetically
     stock_names = [os.path.splitext(f)[0] for f in excel_files]
-
-    if not excel_files:
-        st.error("No Excel files found in the directory. Please add Excel files.")
-        st.stop()
-
     file_mapping = dict(zip(stock_names, excel_files))
-
+    selected_stock = st.sidebar.selectbox("Select Stock", stock_names)
     selected_file = st.sidebar.selectbox("Select Excel File", excel_files)
 
     if selected_file != st.session_state.selected_file:
