@@ -1073,7 +1073,7 @@ def main():
 
     # Fetch Excel files
     st.sidebar.markdown("### 📁 Data Source")
-    folder_path = "excel files"  # Define the folder name
+    folder_path = "excels"  # Define the folder name
     try:
         excel_files = sorted([f for f in os.listdir(folder_path) if f.endswith('.xlsx')])
     except FileNotFoundError:
