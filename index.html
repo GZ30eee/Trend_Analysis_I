@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PatternPulse - Market Intelligence Platform</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #93c5fd;
+            --muted: #6b7280;
+            --background: #ffffff;
+            --muted-bg: #f9fafb;
+            --border: #e5e7eb;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1f2937;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .text-muted {
+            color: var(--muted) !important;
+        }
+        
+        .bg-muted {
+            background-color: var(--muted-bg);
+        }
+        
+        .border {
+            border-color: var(--border) !important;
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            color: var(--primary);
+        }
+        
+        .popular-badge {
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 12px;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <header class="sticky-top bg-white border-bottom">
+        <div class="container py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-lightning-charge-fill text-primary fs-4"></i>
+                    <span class="fs-4 fw-bold">PatternPulse</span>
+                </div>
+                
+                <nav class="d-none d-md-flex align-items-center gap-4">
+                    <a href="#features" class="text-decoration-none text-dark small fw-medium">Features</a>
+                    <a href="#accuracy" class="text-decoration-none text-dark small fw-medium">Accuracy</a>
+                    <a href="#how-it-works" class="text-decoration-none text-dark small fw-medium">Working</a>
+                    <!-- <a href="#contact" class="text-decoration-none text-dark small fw-medium">Contact</a> -->
+                </nav>
+                
+                <div class="d-flex align-items-center gap-3">
+                    <!-- <a href="#" class="text-decoration-none text-dark small fw-medium d-none d-sm-inline">Log in</a> -->
+                    <button class="btn btn-primary btn-sm">v.1.1.0</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow-1">
+        <!-- Hero Section -->
+        <section class="py-5 py-md-5 py-lg-5 py-xl-5">
+            <div class="container px-4">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <div class="mb-4">
+                            <h1 class="display-4 fw-bold mb-3">Decode Market Patterns</h1>
+                            <p class="lead text-muted mb-4">
+                                The LSTM-powered platform that spots trading patterns before they emerge. Trade smarter, react faster, and profit consistently.
+                            </p>
+                        </div>
+                        <div class="d-flex flex-column flex-sm-row gap-2">
+                            <a href="https://dynamicscanner.streamlit.app/" class="btn btn-primary btn-lg d-flex align-items-center gap-1">
+                                Explore Live Market
+                                <!-- Uncomment if you want the arrow icon -->
+                                <!-- <i class="bi bi-arrow-right"></i> -->
+                              </a>
+                              
+                              <!-- Historic Data Button -->
+                              <a href="https://staticversion3.streamlit.app/" class="btn btn-outline-primary btn-lg">
+                                See Historic Data
+                              </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="image.png" alt="Market analysis dashboard" class="img-fluid rounded-3 shadow">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-5 py-md-5 py-lg-5 bg-muted">
+            <div class="container px-4">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-3">Powerful Pattern Detection</h2>
+                    <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                        Everything you need to identify profitable chart patterns and market movements.
+                    </p>
+                </div>
+                
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="p-4 rounded-3 border bg-white shadow-sm h-100">
+                            <div class="feature-icon mb-3">
+                                <i class="bi bi-check-circle-fill fs-4"></i>
+                            </div>
+                            <h3 class="h4 mb-2">LASTM-bbased detecion</h3>
+                            <p class="text-muted mb-0">
+                                The ultimate usage of LSTM to predict, detect and analyize the live patterns.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="p-4 rounded-3 border bg-white shadow-sm h-100">
+                            <div class="feature-icon mb-3">
+                                <i class="bi bi-check-circle-fill fs-4"></i>
+                            </div>
+                            <h3 class="h4 mb-2">Backtesting</h3>
+                            <p class="text-muted mb-0">
+                                Test strategies against historical data to validate pattern effectiveness.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="p-4 rounded-3 border bg-white shadow-sm h-100">
+                            <div class="feature-icon mb-3">
+                                <i class="bi bi-check-circle-fill fs-4"></i>
+                            </div>
+                            <h3 class="h4 mb-2">Multi-timeframe</h3>
+                            <p class="text-muted mb-0">
+                                Analyze patterns across different timeframes for comprehensive insights.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+       <!-- Pattern Accuracy Section -->
+        <section id="accuracy" class="py-5 py-md-5 py-lg-5">
+            <div class="container px-4">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-3">80%+ Accuracy Rate</h2>
+                    <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                        Our AI detects 100+ proven chart patterns with 90% historical accuracy
+                    </p>
+                </div>
+                
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4">
+                        <div class="text-center p-4">
+                            <div class="display-4 fw-bold text-primary mb-2">83%</div>
+                            <h3 class="h4">Head & Shoulders</h3>
+                            <p class="text-muted">Most reliable reversal pattern</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-4">
+                            <div class="display-4 fw-bold text-primary mb-2">89%</div>
+                            <h3 class="h4">Double Tops/Bottoms</h3>
+                            <p class="text-muted">High-probability trend changes</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-4">
+                            <div class="display-4 fw-bold text-primary mb-2">91%</div>
+                            <h3 class="h4">Cup and Handle</h3>
+                            <p class="text-muted">Continuation patterns</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="py-5 py-md-5 py-lg-5 bg-muted">
+            <div class="container px-4">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-3">How PatternPulse Works</h2>
+                    <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                        Our 3-step process to identify profitable opportunities
+                    </p>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="p-4 rounded-3 border bg-white shadow-sm h-100">
+                            <div class="feature-icon mb-3">
+                                <span class="fw-bold">1</span>
+                            </div>
+                            <h3 class="h4 mb-3">Scan Markets</h3>
+                            <p class="text-muted">
+                                Our algorithms continuously analyze thousands of instruments across all timeframes
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-4 rounded-3 border bg-white shadow-sm h-100">
+                            <div class="feature-icon mb-3">
+                                <span class="fw-bold">2</span>
+                            </div>
+                            <h3 class="h4 mb-3">Detect Patterns</h3>
+                            <p class="text-muted">
+                                Machine learning identifies high-probability chart formations as they emerge
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-4 rounded-3 border bg-white shadow-sm h-100">
+                            <div class="feature-icon mb-3">
+                                <span class="fw-bold">3</span>
+                            </div>
+                            <h3 class="h4 mb-3">Deliver Alerts</h3>
+                            <p class="text-muted">
+                                Real-time notifications with entry points, targets, and stop-loss levels
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- Pattern Gallery Section -->
+<section id="patterns" class="py-5 py-md-5 py-lg-5">
+    <div class="container px-4">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Patterns We Detect</h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                Professional-grade technical analysis at your fingertips
+            </p>
+        </div>
+        
+        <!-- Pattern Cards Section -->
+        <div class="row justify-content-center g-4">
+            <!-- Card 1 -->
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="p-3 border rounded-3 bg-white shadow-sm h-100 text-center">
+                    <img src="hs.png" alt="Head and Shoulders" class="img-fluid rounded mb-3" style="max-height: 180px;">
+                    <h3 class="h5 mb-2">Head & Shoulders</h3>
+                    <p class="small text-muted mb-0">83% accuracy reversal pattern</p>
+                    <div class="mt-2">
+                        <span class="badge bg-primary bg-opacity-10 text-primary">Top Reversal</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="p-3 border rounded-3 bg-white shadow-sm h-100 text-center">
+                    <img src="ch.png" alt="Cup and Handle" class="img-fluid rounded mb-3" style="max-height: 180px;">
+                    <h3 class="h5 mb-2">Cup & Handle</h3>
+                    <p class="small text-muted mb-0">Bullish continuation pattern</p>
+                    <div class="mt-2">
+                        <span class="badge bg-success bg-opacity-10 text-success">Continuation</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="p-3 border rounded-3 bg-white shadow-sm h-100 text-center">
+                    <img src="db.png" alt="Double Bottom" class="img-fluid rounded mb-3" style="max-height: 180px;">
+                    <h3 class="h5 mb-2">Double Bottom</h3>
+                    <p class="small text-muted mb-0">89% accuracy bullish signal</p>
+                    <div class="mt-2">
+                        <span class="badge bg-primary bg-opacity-10 text-primary">Bottom Reversal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="https://dynamicscanner.streamlit.app/" class="btn btn-outline-primary">
+                View All Patterns <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+        <!-- CTA Section -->
+        <!-- How to Use Modal -->
+        <div class="modal fade" id="howToUseModal" tabindex="-1" aria-labelledby="howToUseModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="howToUseModalLabel">How to Use PatternPulse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                        <h6><i class="bi bi-lightning-charge"></i> Live Data Analysis</h6>
+                        </div>
+                        <div class="card-body">
+                        <ol class="list-group list-group-numbered">
+                            <li class="list-group-item border-0">Select your date range</li>
+                            <li class="list-group-item border-0">Choose whether to use LSTM model</li>
+                            <li class="list-group-item border-0">Scan stocks in your watchlist</li>
+                            <li class="list-group-item border-0">View detected patterns and charts</li>
+                        </ol>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                        <h6><i class="bi bi-clock-history"></i> Historical Data Analysis</h6>
+                        </div>
+                        <div class="card-body">
+                        <ol class="list-group list-group-numbered">
+                            <li class="list-group-item border-0">Select the stock you want to analyze</li>
+                            <li class="list-group-item border-0">System automatically determines optimal date range</li>
+                            <li class="list-group-item border-0">View historical patterns and performance charts</li>
+                        </ol>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- <div class="mt-3 p-3 bg-light rounded">
+                    <h6><i class="bi bi-box-arrow-up-right"></i> Explore More:</h6>
+                    <a href="#" class="btn btn-outline-primary mt-2">View Tutorial Videos</a>
+                    <a href="#" class="btn btn-outline-success mt-2 ms-2">Read Documentation</a>
+                </div> -->
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        <!-- Updated CTA Section -->
+        <section id="contact" class="py-5 py-md-5 py-lg-5">
+            <div class="container px-4">
+            <div class="text-center">
+                <h2 class="display-5 fw-bold mb-3">Ready to Transform Your Trading?</h2>
+                <p class="lead text-muted mx-auto mb-4" style="max-width: 700px;">
+                Join us and experience PatternPulse to gain a competitive edge in the ever-changing markets.
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
+                <button class="btn btn-primary btn-lg d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#howToUseModal">
+                    How to use?
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+                <a href="https://dynamicscanner.streamlit.app/" class="btn btn-outline-primary btn-lg">
+                    Explore
+                </a>
+                </div>
+            </div>
+            </div>
+        </section>
+  
+  <!-- Required Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-top bg-white py-4 py-md-5 mt-auto">
+        <div class="container px-4">
+            <!-- <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="bi bi-lightning-charge-fill text-primary fs-4"></i>
+                        <span class="fs-4 fw-bold">PatternPulse</span>
+                    </div>
+                    <p class="small text-muted">
+                        AI-powered pattern detection for smarter trading decisions.
+                    </p>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="small fw-bold text-uppercase mb-3">Product</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted small">Features</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted small">Pricing</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted small">Integrations</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted small">Roadmap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="small fw-bold text-uppercase mb-3">Company</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted small">About</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted small">Blog</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted small">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted small">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="small fw-bold text-uppercase mb-3">Legal</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted small">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted small">Terms</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted small">Disclosures</a></li>
+                    </ul>
+                </div>
+            </div> -->
+            
+            <div class="mt-3 pt-4 d-flex flex-column flex-sm-row justify-content-center align-items-center">
+                <p class="small text-muted mb-2 mb-sm-0">
+                    © <script>document.write(new Date().getFullYear())</script> PatternPulse. All rights reserved.
+                </p>
+                <!-- <div class="d-flex gap-3">
+                    <a href="#" class="text-muted"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-muted"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-muted"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-muted"><i class="bi bi-linkedin"></i></a>
+                </div> -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
